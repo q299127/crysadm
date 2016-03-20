@@ -223,6 +223,12 @@
                                                                 </form>
                                                             {% endif %}
                                                         {% endif %}
+                                                        <form style="margin-left: 3px;float:right;" role="form" action="/set_device_web" method="post">
+                                                            <input type="hidden" name="device_id" value="{{ dev.device_id }}" />
+                                                            <input type="hidden" name="account_id" value="{{ dev.account_name }}" />
+                                                            <input type="hidden" name="session_id" value="{{ row.session_id }}" />
+                                                            <button type="submit" style="margin: 0px;" onclick="javascript:return confirm('即将弹出管理页面')" class="btn btn-info btn-xs">管理</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             {% endfor %}

@@ -7,7 +7,7 @@ import json
 import requests
 from urllib.parse import urlparse, parse_qs, unquote
 import time
-from api import collect, ubus_cd, api_searcht_steal, api_searcht_collect, api_getaward, collect, api_summary_steal, DEBUG_MODE
+from api import collect, ubus_cd, api_searcht_steal, api_searcht_collect, api_getaward, collect, api_summary_steal, uweb_cd
 
 # 加载矿机主页面
 @app.route('/excavators')
@@ -297,3 +297,16 @@ def set_device_name():
             ["server", "set_device_name", {"device_name": new_name, "device_id": device_id}])
 
     return json.dumps(dict(status='success'))
+
+# 生成设备管理
+@app.route('/set_device_web', methods=['POST'])
+@requires_auth
+def set_device_web():
+    device_id = request.values.get('device_id')
+    session_id = request.values.get('session_id')
+    account_id = request.values.get('account_id')
+
+    r = uweb_cd(session_id, account_id, device_id)
+    #return render_template('http://kj.xunlei.com/setting.html?user_id=235839339&session_id=80F906F5402935263B0ADEFE5C9E2CFF')
+    print('%s' % r)
+    return render_template('p.html', r=r)
