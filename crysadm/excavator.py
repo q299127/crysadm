@@ -118,9 +118,9 @@ def check_cashbox_collect(cookies):
     if box_info.get('r') != 0:
         r = box_info
     else:
-        time.sleep(2)
+        # time.sleep(2)
         r = api_searcht_collect(cookies=cookies, searcht_id=box_info.get('sid'))
-        time.sleep(1)
+        # time.sleep(1)
         api_summary_steal(cookies=cookies, searcht_id=box_info.get('sid'))
     return r
 
