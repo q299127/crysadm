@@ -28,7 +28,7 @@ def get_data(username):
     start_time = datetime.now()
     try:
         for user_id in r_session.smembers('accounts:%s' % username):
-            time.sleep(40)
+            time.sleep(20)
             
             account_key = 'account:%s:%s' % (username, user_id.decode('utf-8'))
             account_info = json.loads(r_session.get(account_key).decode('utf-8'))
@@ -394,8 +394,8 @@ if __name__ == '__main__':
     # 每360分钟检测一次幸运转盘
     threading.Thread(target=timer, args=(getaward_crystal, 60*60*6)).start()
     # 刷新在线用户数据，单位为秒，默认为20秒。
-    # 每20秒刷新一次在线用户数据
-    threading.Thread(target=timer, args=(get_online_user_data, 20)).start()
+    # 每60秒刷新一次在线用户数据
+    threading.Thread(target=timer, args=(get_online_user_data, 60)).start()
     # 刷新离线用户数据，单位为秒，默认为60秒。
     # 每10分钟刷新一次离线用户数据
     threading.Thread(target=timer, args=(get_offline_user_data, 60*10)).start()
